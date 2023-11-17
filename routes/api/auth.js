@@ -5,8 +5,7 @@ const User = require('../../models/User')
 const { check, validationResult } = require('express-validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const config = require('config')
-
+require('dotenv').config()
 //@route -> api/auth
 //@desc -> test route
 //@access -> Public
@@ -63,7 +62,7 @@ router.post('/', [
 
     jwt.sign(
       payload,
-      config.get('jwtsecret'),
+      process.env.JWTSECRET,
       // TODO: Change back to 3600 in prodution
       { expiresIn: 360000 },
       (err, token) => {
